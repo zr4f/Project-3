@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(){
-    ifstream file("XMR.csv");
+    ifstream file("src/XMR.csv");
     if (!file.is_open()) {
         cerr << "Error: cannot open file" << endl;
         return 1;
@@ -18,7 +18,12 @@ int main(){
 
     simpleHashMap hmap;
     string line;
+    bool firstLine = true;
     while(getline(file, line)){
+        if (firstLine == true) {
+            firstLine = false;
+            continue;
+        }
         vector<string> row;
         stringstream ss(line);
         string data;
@@ -31,16 +36,12 @@ int main(){
         int count = 0;
         bool skip = false;
         while(getline(ss, data, ',')){
-            if(count == 0){
-                continue;
-            }
             if(count == 1){
-                date = data;
+                size_t space_pos = data.find(' ');
+                date = data.substr(0, space_pos);
+                time = data.substr(space_pos + 1);
             }
             if(count == 2){
-                time = data;
-            }
-            if(count == 3){
                 temp_str = data;
                 if(temp_str != "M"){
                     temp = stod(temp_str);
@@ -49,7 +50,7 @@ int main(){
                     skip = true;
                 }
             }
-            if(count == 4){
+            if(count == 3) {
                 humid_str = data;
                 if(humid_str != "M"){
                     humid = stod(humid_str);
@@ -105,7 +106,7 @@ int main(){
             cin >> date2;
             vector<string> output = hmap.findMaxRange(date1, date2);
             cout << "Maximum Temperature Between " << date1 << " and " << date2 << endl;
-            cout << output[2] << " °F on " << output[0] << " at " << output[1] << endl;
+            cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
         }
         if(option == 4){
             string date1;

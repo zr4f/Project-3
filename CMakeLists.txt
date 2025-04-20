@@ -21,12 +21,12 @@ include_directories(src)
 
 add_executable(Main
         src/main.cpp # your main file
-        src/heaps.cpp
-        src/heaps.h
-        src/simpleHashMap.cc
+        src/maxHeap.cpp
+        src/maxHeap.h
+        src/simpleHashMap.cpp
         src/simpleHashMap.h
-        # example (can also separate with newlines):
-        # src/AVL.h src/AVL.cpp
+        src/minHeap.cpp
+        src/minHeap.h
         )
         
 # These tests can use the Catch2-provided main
