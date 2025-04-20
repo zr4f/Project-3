@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "sstream": "cpp",
+main
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -63,5 +64,8 @@
         "thread": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
+=======
+        "iostream": "cpp"
+syd's-branch
     }
 }
