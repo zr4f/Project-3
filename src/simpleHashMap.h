@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <utility>
 
+
+
 using namespace std; 
 
 class simpleHashMap {
@@ -12,6 +14,7 @@ class simpleHashMap {
         string incrementDate(const string& date);
 
     public:
+        bool findDate(const string& date);
         simpleHashMap();
         void insert(const string& date, const string& time, const pair<double, double>& measurements);
         vector<string> findMinRange(const string& date1, const string& date2);

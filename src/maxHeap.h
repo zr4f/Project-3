@@ -21,8 +21,10 @@ private:
     void heapifyUp(int index);
     void heapifyDown(int index);
 
+
 public:
     maxHeap();
     bool insert(const string& _date, const string& _time, const double& _temp, const double& _humidity);
     Node* extractMax();
+    vector<string> getMax();
 };
