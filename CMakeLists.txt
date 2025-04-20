@@ -21,7 +21,10 @@ include_directories(src)
 
 add_executable(Main
         src/main.cpp # your main file
-        # add your own header files below - should be automatically added in CLion
+        src/heaps.cpp
+        src/heaps.h
+        src/simpleHashMap.cc
+        src/simpleHashMap.h
         # example (can also separate with newlines):
         # src/AVL.h src/AVL.cpp
         )
