@@ -3,9 +3,12 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+main
+=======
 #include <utility>
 #include <limits>
 #include "simpleHashMap.h"
+syd's-branch
 
 using namespace std;
 
@@ -16,6 +19,19 @@ int main(){
         return 1;
     }
 
+main
+    //initialize data structures here
+    vector<vector<string>> test;
+    string line;
+    //while(getline(file, line)){
+    for(int i = 0; i < 10; i++){
+        vector<string> row;
+        stringstream ss(line);
+        string data;
+        while(getline(ss, data, ',')){
+            row.push_back(data);
+        }
+=======
     simpleHashMap hmap;
     string line;
     while(getline(file, line)){
@@ -65,10 +81,20 @@ int main(){
         }
         pair<double, double> temp_humid = make_pair(temp, humid);
         hmap.insert(date, time, temp_humid);
+syd's-branch
     }
 
     file.close();
 
+main
+    for (auto row : test) {
+        for (auto data : row) {
+            cout << data << " ";
+        }
+        cout << endl;
+    }
+
+=======
     
     int option = 0;
     while(option != 5){
@@ -121,4 +147,5 @@ int main(){
         }
     }
     return 0;
+syd's-branch
 }
