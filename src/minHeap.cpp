@@ -57,3 +57,12 @@ minHeap::Node* minHeap::extractMin() {
     }
     return minNode;
 }
+
+vector<string> minHeap::getMin(){
+    vector<string> result;
+    result.push_back(heap[0]->date);
+    result.push_back(heap[0]->time);
+    result.push_back(to_string(heap[0]->temp));
+    result.push_back(to_string(heap[0]->humidity));
+    return result;
+}

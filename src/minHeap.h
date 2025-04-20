@@ -26,6 +26,7 @@ class minHeap{
         minHeap();
         bool insert(const string& _date, const string& _time, const double& _temp, const double& humidity);
         Node* extractMin();
+        vector<string> getMin();
 };
 
 

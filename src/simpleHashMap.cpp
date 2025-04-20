@@ -1,11 +1,13 @@
 #include "simpleHashMap.h"
 #include <sstream>
 #include <iomanip>
+#include <iostream>
+#include <utility>
 
 
 simpleHashMap::simpleHashMap(){}
 void simpleHashMap::insert(const string& date, const string& time, const pair<double, double>& measurements) {
-    map[date].push_back({time, measurements});
+    map[date].push_back(make_pair(time, measurements));
 }
 
 // helper function to incriment the date so we  can go through the hashmap
@@ -37,11 +39,26 @@ string simpleHashMap::incrementDate(const string& date) {
 
 // takes in a range of dates and returns the date of the lowest temp, time of the lowest temp, and the lowest temp as a vector
 vector<string> simpleHashMap::findMinRange(const string& date1, const string& date2) {
+    vector<string> result;
+    if (!findDate(date1)) {
+        result.push_back("N/A");
+        result.push_back("N/A");
+        result.push_back("N/A");
+        cout << "Invalid date\n" <<endl;
+        return result;
+    }
+    if (!findDate(date2)) {
+        result.push_back("N/B");
+        result.push_back("N/B");
+        result.push_back("N/B");
+        cout << "Invalid date\n" <<endl;
+        return result;
+    }
     string minDate = date1;
     string minTime = map.at(date1).front().first;
     double minTemp = map.at(date1).front().second.first;
     
-    vector<string> result;
+
     string current = date1;
   
     while (current <= date2) {
@@ -66,11 +83,25 @@ vector<string> simpleHashMap::findMinRange(const string& date1, const string& da
 
 // takes in a range of dates and returns the date of the highest temp, time of the highest temp, and the highest temp as a vector
 vector<string> simpleHashMap::findMaxRange(const string& date1, const string& date2) {
+    vector<string> result;
+    if (map.find(date1) == map.end()) {
+        result.push_back("N/A");
+        result.push_back("N/A");
+        result.push_back("N/A");
+        cout << "Invalid date" <<endl;
+        return result;
+    }
+    if (map.find(date2) == map.end()) {
+        result.push_back("N/A");
+        result.push_back("N/A");
+        result.push_back("N/A");
+        cout << "Invalid date" <<endl;
+        return result;
+    }
     string maxDate = date1;
     string maxTime = map.at(date1).front().first;
     double maxTemp = map.at(date1).front().second.first;
-    
-    vector<string> result;
+
     string current = date1;
   
     while (current <= date2) {
@@ -91,4 +122,11 @@ vector<string> simpleHashMap::findMaxRange(const string& date1, const string& da
     result.push_back(maxTime);
     result.push_back(to_string(maxTemp));
     return result;
+}
+
+bool simpleHashMap::findDate(const string& date){
+    if (map.find(date)!=map.end()) {
+        return true;
+    }
+    return false;
 }
