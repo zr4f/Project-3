@@ -117,7 +117,7 @@ int main(){
             cin >> date2;
             vector<string> output = hmap.findMinRange(date1, date2);
             cout << "Minimum Temperature Between " << date1 << " and " << date2 << endl;
-            cout << output[2] << " °F on " << output[0] << " at " << output[1] << endl;
+            cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
         }
     }
     return 0;
