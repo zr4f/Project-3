@@ -1,13 +1,13 @@
 #include "maxHeap.h"
 #include <iostream>
-#include <stdexcept>
+
 
 maxHeap::maxHeap() {}
 
 void maxHeap::heapifyUp(int index) {
     while (index > 0) {
         int parent = (index - 1) / 2;
-        if (heap[index]->temp > heap[parent]->temp) { // flip < to >
+        if (heap[index]->temp > heap[parent]->temp) {
             swap(heap[index], heap[parent]);
             index = parent;
         } else {
@@ -23,10 +23,10 @@ void maxHeap::heapifyDown(int index) {
         int right = 2 * index + 2;
         int largest = index;
 
-        if (left < size && heap[left]->temp > heap[largest]->temp) { // flip < to >
+        if (left < size && heap[left]->temp > heap[largest]->temp) { 
             largest = left;
         }
-        if (right < size && heap[right]->temp > heap[largest]->temp) { // flip < to >
+        if (right < size && heap[right]->temp > heap[largest]->temp) { 
             largest = right;
         }
         if (largest != index) {
@@ -46,10 +46,6 @@ bool maxHeap::insert(const string& _date, const string& _time, const double& _te
 }
 
 maxHeap::Node* maxHeap::extractMax() {
-    if (heap.empty()) {
-        throw runtime_error("Heap is empty");
-    }
-
     Node* maxNode = heap[0];
     heap[0] = heap.back();
     heap.pop_back();
