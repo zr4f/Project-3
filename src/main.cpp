@@ -105,7 +105,7 @@ int main(){
         if(option == 2){
             vector<string> output;
             output = min_heap.getMin();
-            cout << "Maximum Temperature: " << output[2] << " recorded at " << output[1] << " on " << output[0] << endl;
+            cout << "Minimum Temperature: " << output[2] << " recorded at " << output[1] << " on " << output[0] << endl;
         }
         if(option == 3){
             string date1;
