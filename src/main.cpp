@@ -5,6 +5,9 @@
 #include <vector>
 #include <utility>
 #include <limits>
+
+#include "maxHeap.h"
+#include "minHeap.h"
 #include "simpleHashMap.h"
 
 using namespace std;
@@ -15,7 +18,8 @@ int main(){
         cerr << "Error: cannot open file" << endl;
         return 1;
     }
-
+    maxHeap max_heap;
+    minHeap min_heap;
     simpleHashMap hmap;
     string line;
     bool firstLine = true;
@@ -66,6 +70,8 @@ int main(){
         }
         pair<double, double> temp_humid = make_pair(temp, humid);
         hmap.insert(date, time, temp_humid);
+        max_heap.insert(date, time, temp, humid);
+        min_heap.insert(date, time, temp, humid);
     }
 
     file.close();
@@ -91,11 +97,15 @@ int main(){
         }
         //Max Heap
         if(option == 1){
-            //Max Heap
+            vector<string> output;
+            output = max_heap.getMax();
+            cout << "Maximum Temperature: " << output[2] << " recorded at " << output[1] << " on " << output[0] << endl;
         }
         //Min Heap
         if(option == 2){
-            //Min Heap
+            vector<string> output;
+            output = min_heap.getMin();
+            cout << "Maximum Temperature: " << output[2] << " recorded at " << output[1] << " on " << output[0] << endl;
         }
         if(option == 3){
             string date1;
