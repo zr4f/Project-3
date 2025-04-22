@@ -63,6 +63,9 @@ int main(){
                     continue;
                 }
                 precip = stod(precip_str);
+                if(precip > 4.00) { //skipped due to equipment malfunction
+                    skip = true;
+                }
             }
             count++;
         }
@@ -103,18 +106,27 @@ int main(){
         if(option == 1){
             vector<string> output;
             output = max_heap.getMax();
-            cout << "Maximum Temperature: " << output[2] << " F recorded at " << output[1] << " on " << output[0] << endl;
+            double temperature = stod(output[2]);
+            cout << fixed << showpoint;
+            cout << setprecision(2);
+            cout << "Maximum Temperature: " << temperature << " F recorded at " << output[1] << " on " << output[0] << endl;
         }
         //Min Heap
         if(option == 2){
             vector<string> output;
             output = min_heap.getMin();
-            cout << "Minimum Temperature: " << output[2] << " F recorded at " << output[1] << " on " << output[0] << endl;
+            double temperature = stod(output[2]);
+            cout << fixed << showpoint;
+            cout << setprecision(2);
+            cout << "Minimum Temperature: " << temperature << " F recorded at " << output[1] << " on " << output[0] << endl;
         }
         if(option == 3){
             vector<string> output;
-            output = min_heap.getMin();
-            cout << "Maximum Precipitation: " << output[2] << " (in) recorded at " << output[1] << " on " << output[0] << endl;
+            output = max_prec_heap.getMax();
+            double precipitation = stod(output[3]);
+            cout << fixed << showpoint;
+            cout << setprecision(2);
+            cout << "Maximum Precipitation: " << precipitation << " (in) recorded at " << output[1] << " on " << output[0] << endl;
         }
         if(option == 4){
             string date1;
@@ -124,8 +136,11 @@ int main(){
             cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
             cin >> date2;
             vector<string> output = hmap.findMaxTempRange(date1, date2);
+            double temperature = stod(output[2]);
+            cout << fixed << showpoint;
+            cout << setprecision(2);
             cout << "Maximum Temperature Between " << date1 << " and " << date2 << endl;
-            cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
+            cout << temperature << " F on " << output[0] << " at " << output[1] << endl;
         }
         if(option == 5){
             string date1;
@@ -135,8 +150,11 @@ int main(){
             cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
             cin >> date2;
             vector<string> output = hmap.findMinTempRange(date1, date2);
+            double temperature = stod(output[2]);
+            cout << fixed << showpoint;
+            cout << setprecision(2);
             cout << "Minimum Temperature Between " << date1 << " and " << date2 << endl;
-            cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
+            cout << temperature << " F on " << output[0] << " at " << output[1] << endl;
         }
         if(option == 6) {
             string date1;
@@ -146,8 +164,11 @@ int main(){
             cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
             cin >> date2;
             vector<string> output = hmap.findMaxPrecRange(date1, date2);
+            double precipitation = stod(output[2]);
+            cout << fixed << showpoint;
+            cout << setprecision(2);
             cout << "Maximum Precipitation Between " << date1 << " and " << date2 << endl;
-            cout << output[2] << " (in) on " << output[0] << " at " << output[1] << endl;
+            cout << precipitation << " (in) on " << output[0] << " at " << output[1] << endl;
         }
     }
     return 0;
