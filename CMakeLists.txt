@@ -21,12 +21,12 @@ include_directories(src)
 
 add_executable(Main
         src/main.cpp # your main file
-        src/maxHeap.cpp
-        src/maxHeap.h
+        src/maxTempHeap.cpp
+        src/maxTempHeap.h
         src/simpleHashMap.cpp
         src/simpleHashMap.h
-        src/minHeap.cpp
-        src/minHeap.h
+        src/minTempHeap.cpp
+        src/minTempHeap.h
         src/maxPrecHeap.cpp
         src/maxPrecHeap.h
         )

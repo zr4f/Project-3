@@ -6,8 +6,8 @@
 #include <utility>
 #include <limits>
 #include <iomanip>
-#include "maxHeap.h"
-#include "minHeap.h"
+#include "maxTempHeap.h"
+#include "minTempHeap.h"
 #include "maxPrecHeap.h"
 #include "simpleHashMap.h"
 
@@ -19,8 +19,8 @@ int main(){
         cerr << "Error: cannot open file" << endl;
         return 1;
     }
-    maxHeap max_heap;
-    minHeap min_heap;
+    maxTempHeap max_heap;
+    minTempHeap min_heap;
     maxPrecHeap max_prec_heap;
     simpleHashMap hmap;
     string line;
