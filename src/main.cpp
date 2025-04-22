@@ -5,9 +5,10 @@
 #include <vector>
 #include <utility>
 #include <limits>
-
+#include <iomanip>
 #include "maxHeap.h"
 #include "minHeap.h"
+#include "maxPrecHeap.h"
 #include "simpleHashMap.h"
 
 using namespace std;
@@ -20,6 +21,7 @@ int main(){
     }
     maxHeap max_heap;
     minHeap min_heap;
+    maxPrecHeap max_prec_heap;
     simpleHashMap hmap;
     string line;
     bool firstLine = true;
@@ -34,9 +36,9 @@ int main(){
         string date; 
         string time;
         string temp_str;
-        string humid_str;
+        string precip_str;
         double temp;
-        double humid;
+        double precip;
         int count = 0;
         bool skip = false;
         while(getline(ss, data, ',')){
@@ -55,35 +57,37 @@ int main(){
                 }
             }
             if(count == 3) {
-                humid_str = data;
-                if(humid_str != "M"){
-                    humid = stod(humid_str);
-                }
-                else{
+                precip_str = data;
+                if(precip_str == "M" || precip_str == "T"){
                     skip = true;
+                    continue;
                 }
+                precip = stod(precip_str);
             }
             count++;
         }
         if(skip){
             continue;
         }
-        pair<double, double> temp_humid = make_pair(temp, humid);
+        pair<double, double> temp_humid = make_pair(temp, precip);
         hmap.insert(date, time, temp_humid);
-        max_heap.insert(date, time, temp, humid);
-        min_heap.insert(date, time, temp, humid);
+        max_heap.insert(date, time, temp, precip);
+        min_heap.insert(date, time, temp, precip);
+        max_prec_heap.insert(date, time, temp, precip);
     }
 
     file.close();
 
     int option = 0;
-    while(option != 5){
-        cout << "Weather Data Menu" << endl;
+    while(option != 7){
+        cout << "\n----Weather Data Menu----" << endl;
         cout << "1. Find Maximum Temperature from Data" << endl;
         cout << "2. Find Minimum Temperature from Data" << endl;
-        cout << "3. Find Maximum Temperature from Date Range" << endl;
-        cout << "4. Find Minimum Temperature from Date Range" << endl;
-        cout << "5. Quit" << endl;
+        cout << "3. Find Maximum Precipitation from Data" << endl;
+        cout << "4. Find Maximum Temperature from Date Range" << endl;
+        cout << "5. Find Minimum Temperature from Date Range" << endl;
+        cout << "6. Find Maximum Precipitation from Date Range" << endl;
+        cout << "7. Quit" << endl;
         cout << "\nEnter Selection:" << endl;
 
         while (!(cin >> option)) {
@@ -91,32 +95,26 @@ int main(){
             cin.ignore(numeric_limits<streamsize>::max(),'\n');
             cout << "Input is not a number." << std::endl;
         }
-        if(option < 1 || option > 5){
-            cout << "Input is not a number 1-5." << endl;
+        if(option < 1 || option > 7){
+            cout << "Input is not a number 1-7." << endl;
             continue;
         }
         //Max Heap
         if(option == 1){
             vector<string> output;
             output = max_heap.getMax();
-            cout << "Maximum Temperature: " << output[2] << " recorded at " << output[1] << " on " << output[0] << endl;
+            cout << "Maximum Temperature: " << output[2] << " F recorded at " << output[1] << " on " << output[0] << endl;
         }
         //Min Heap
         if(option == 2){
             vector<string> output;
             output = min_heap.getMin();
-            cout << "Minimum Temperature: " << output[2] << " recorded at " << output[1] << " on " << output[0] << endl;
+            cout << "Minimum Temperature: " << output[2] << " F recorded at " << output[1] << " on " << output[0] << endl;
         }
         if(option == 3){
-            string date1;
-            string date2;
-            cout << "Enter Date 1 in format YYYY-MM-DD:" << endl;
-            cin >> date1;
-            cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
-            cin >> date2;
-            vector<string> output = hmap.findMaxRange(date1, date2);
-            cout << "Maximum Temperature Between " << date1 << " and " << date2 << endl;
-            cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
+            vector<string> output;
+            output = min_heap.getMin();
+            cout << "Maximum Precipitation: " << output[2] << " (in) recorded at " << output[1] << " on " << output[0] << endl;
         }
         if(option == 4){
             string date1;
@@ -125,9 +123,31 @@ int main(){
             cin >> date1;
             cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
             cin >> date2;
-            vector<string> output = hmap.findMinRange(date1, date2);
+            vector<string> output = hmap.findMaxTempRange(date1, date2);
+            cout << "Maximum Temperature Between " << date1 << " and " << date2 << endl;
+            cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
+        }
+        if(option == 5){
+            string date1;
+            string date2;
+            cout << "Enter Date 1 in format YYYY-MM-DD:" << endl;
+            cin >> date1;
+            cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
+            cin >> date2;
+            vector<string> output = hmap.findMinTempRange(date1, date2);
             cout << "Minimum Temperature Between " << date1 << " and " << date2 << endl;
             cout << output[2] << " F on " << output[0] << " at " << output[1] << endl;
+        }
+        if(option == 6) {
+            string date1;
+            string date2;
+            cout << "Enter Date 1 in format YYYY-MM-DD:" << endl;
+            cin >> date1;
+            cout << "Enter Date 2 in format YYYY-MM-DD:" << endl;
+            cin >> date2;
+            vector<string> output = hmap.findMaxPrecRange(date1, date2);
+            cout << "Maximum Precipitation Between " << date1 << " and " << date2 << endl;
+            cout << output[2] << " (in) on " << output[0] << " at " << output[1] << endl;
         }
     }
     return 0;

@@ -27,6 +27,8 @@ add_executable(Main
         src/simpleHashMap.h
         src/minHeap.cpp
         src/minHeap.h
+        src/maxPrecHeap.cpp
+        src/maxPrecHeap.h
         )
         
 # These tests can use the Catch2-provided main
