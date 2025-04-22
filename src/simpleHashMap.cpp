@@ -38,7 +38,7 @@ string simpleHashMap::incrementDate(const string& date) {
 
 
 // takes in a range of dates and returns the date of the lowest temp, time of the lowest temp, and the lowest temp as a vector
-vector<string> simpleHashMap::findMinRange(const string& date1, const string& date2) {
+vector<string> simpleHashMap::findMinTempRange(const string& date1, const string& date2) {
     vector<string> result;
     if (!findDate(date1)) {
         result.push_back("N/A");
@@ -82,7 +82,7 @@ vector<string> simpleHashMap::findMinRange(const string& date1, const string& da
 }
 
 // takes in a range of dates and returns the date of the highest temp, time of the highest temp, and the highest temp as a vector
-vector<string> simpleHashMap::findMaxRange(const string& date1, const string& date2) {
+vector<string> simpleHashMap::findMaxTempRange(const string& date1, const string& date2) {
     vector<string> result;
     if (map.find(date1) == map.end()) {
         result.push_back("N/A");
@@ -121,6 +121,93 @@ vector<string> simpleHashMap::findMaxRange(const string& date1, const string& da
     result.push_back(maxDate);
     result.push_back(maxTime);
     result.push_back(to_string(maxTemp));
+    return result;
+}
+
+
+vector<string> simpleHashMap::findMinPrecRange(const string& date1, const string& date2) {
+    vector<string> result;
+    if (!findDate(date1)) {
+        result.push_back("N/A");
+        result.push_back("N/A");
+        result.push_back("N/A");
+        cout << "Invalid date\n" <<endl;
+        return result;
+    }
+    if (!findDate(date2)) {
+        result.push_back("N/B");
+        result.push_back("N/B");
+        result.push_back("N/B");
+        cout << "Invalid date\n" <<endl;
+        return result;
+    }
+    string minDate = date1;
+    string minTime = map.at(date1).front().first;
+    double minPrec = map.at(date1).front().second.second;
+    
+
+    string current = date1;
+  
+    while (current <= date2) {
+        if (map.find(current) != map.end()) {
+            for (auto i : map[current]) {
+                double temp = i.second.second;
+                if (temp < minPrec) {
+                    minPrec = temp;
+                    minDate = current;
+                    minTime = i.first;
+                }
+            }
+        }
+        current = incrementDate(current);
+    }
+
+    result.push_back(minDate);
+    result.push_back(minTime);
+    result.push_back(to_string(minPrec));
+    return result;
+}
+
+// takes in a range of dates and returns the date of the highest temp, time of the highest temp, and the highest temp as a vector
+vector<string> simpleHashMap::findMaxPrecRange(const string& date1, const string& date2) {
+    vector<string> result;
+    if (map.find(date1) == map.end()) {
+        result.push_back("N/A");
+        result.push_back("N/A");
+        result.push_back("N/A");
+        cout << "Invalid date" <<endl;
+        return result;
+    }
+    if (map.find(date2) == map.end()) {
+        result.push_back("N/A");
+        result.push_back("N/A");
+        result.push_back("N/A");
+        cout << "Invalid date" <<endl;
+        return result;
+    }
+    string maxDate = date1;
+    string maxTime = map.at(date1).front().first;
+    double maxPrec = map.at(date1).front().second.second;
+
+    string current = date1;
+  
+    while (current <= date2) {
+        if (map.find(current) != map.end()) {
+            for (auto i : map[current]) {
+                double temp = i.second.second;
+                if (temp > maxPrec) {
+                    maxPrec = temp;
+                    maxDate = current;
+                    maxTime = i.first;
+                }
+            }
+        }
+        current = incrementDate(current);
+    }
+
+    result.push_back(maxDate);
+    result.push_back(maxTime);
+    result.push_back(to_string(maxPrec));
     return result;
 }
 

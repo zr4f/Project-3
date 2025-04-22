@@ -17,7 +17,9 @@ class simpleHashMap {
         bool findDate(const string& date);
         simpleHashMap();
         void insert(const string& date, const string& time, const pair<double, double>& measurements);
-        vector<string> findMinRange(const string& date1, const string& date2);
-        vector<string> findMaxRange(const string& date1, const string& date2);
+        vector<string> findMinTempRange(const string& date1, const string& date2);
+        vector<string> findMaxTempRange(const string& date1, const string& date2);
+        vector<string> findMinPrecRange(const string& date1, const string& date2);
+        vector<string> findMaxPrecRange(const string& date1, const string& date2);
 };
 
