@@ -8,7 +8,7 @@ To use the repository, clone the repository and open it in CLion.
 #### Selecting Weather Station
 Our Code has default acess to the Cape Canaveral Station data from 2013-04-17 to 2025-04-16, but can be applied to any area's weather station.
 
-Go to [this website](https://mesonet.agron.iastate.edu/request/download.phtml?network=FL_ASOS#) and selected what weather station you would like to use and what dates you would like the application to access. Click on the Air Temperature (F) and 1 hour Precipation (in) under the Select from Available Data drop down and export the data as a ".csv" file.
+Go to [this website](https://mesonet.agron.iastate.edu/request/download.phtml?network=FL_ASOS#) and select what weather station you would like to use and what dates you would like the application to access. Click on the Air Temperature (F) and 1 hour Precipation (in) under the Select from Available Data drop down and export the data as a ".csv" file.
 
 When you open CLion replace the original "XMR.csv" with the new data in the same location as the original.
 
